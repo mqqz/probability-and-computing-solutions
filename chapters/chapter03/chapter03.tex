@@ -1,8 +1,41 @@
 \chapter{Moments and Deviations}
 
-
 \paragraph{Exercise 3.1}
 
+\begin{align*}
+  \Var[X] &= \E[X^2] - \E[X]^2 \\
+          &= \int_{1}^n \frac{1}{n-1} x^2 dx - \left(\int_{1}^n \frac{1}{n-1} x dx\right)^2 \\
+          &= \frac{n^3 - 1}{3(n-1)} - \left(\frac{n^2 - 1}{2(n-1)} \right)^2 \\
+          &= \frac{n^2 + n - 1}{3} - \frac{n^2 + 2n + 1}{4} \\
+          &= \frac{n^2 - 2n + 1}{12} = \frac{(n^2 - 1)^2}{12}
+\end{align*}
+
+\paragraph{Exercise 3.2}
+Let Y be chosen uniformly at random from [1,n] then, we know from the exercise above that $\Var[Y] = \tfrac{(n-1)^2}{12}$ and also that $ X = -k + \tfrac{2k(Y-1)}{n-1}$ then we have, by the properties of variance:
+\begin{align*}
+  \Var[X] &= \Var[-k + \tfrac{2k(Y-1)}{n-1}] = \Var[\tfrac{2k(Y-1)}{n-1}] \\
+          &= \left(\tfrac{2k}{n-1}\right)^2 \Var[Y] = \left(\tfrac{2k}{n-1}\right)^2 \cdot \tfrac{(n-1)^2}{12} \\
+          &= \tfrac{k^2}{3}
+\end{align*}
+
+\paragraph{Exercise 3.3}
+The mean value of a single dice roll $\E[X_i] = \tfrac{7}{2}$ and variance $\Var[X_i] = \tfrac{35}{12}$ therefore, the sum of a 100 independent dice rolls has mean $\E[X] = 350$ and variance $\Var[X] = \tfrac{875}{3}$. Then, by Chebyshev:
 \[
-\Var[X]
+  \Pr[|X - 350| \geq 50] &\leq \frac{\Var[X]}{50^2} = \frac{875/3}{2500} = \frac{7}{60} \approx 0.1167
 \]
+
+\paragraph{Exercise 3.4}
+\begin{align*}
+  \Var[cX] &= \E[(cX - \E[cX])^2]  = \E[c^2(X - \E[X])^2] \\
+           &= c^2 \E[(X - \E[X])^2] = c^2\Var[X] \\
+\end{align*}
+
+\paragraph{Exercise 3.5}
+\begin{align*}
+  \Var[X + Y] &= \E[(X + Y - \E[X + Y])^2] = \E[(X + Y - \E[X] - \E[Y])^2] \\
+              &= \E[(X - \E[X])^2 + (Y - \E[Y])^2 + 2(X - \E[X])(Y - \E[Y])] \\
+              &= \Var[X] + \Var[Y] + 2\E[(X - \E[X])(Y - \E[Y])] \\
+              &= \Var[X] + \Var[Y] + 2\E[X - \E[X]]\E[Y - \E[Y]] && (\text{since X and Y are independent}) \\
+              &= \Var[X] + \Var[Y]
+\end{align*}
+
