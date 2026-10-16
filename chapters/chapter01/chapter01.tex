@@ -1,24 +1,953 @@
 \chapter{Events and Probability}
 
-\input{chapters/chapter01/exercises/exercise01.01}
-\input{chapters/chapter01/exercises/exercise01.02}
-\input{chapters/chapter01/exercises/exercise01.03}
-\input{chapters/chapter01/exercises/exercise01.04}
-\input{chapters/chapter01/exercises/exercise01.05}
-\input{chapters/chapter01/exercises/exercise01.06}
-\input{chapters/chapter01/exercises/exercise01.07}
-\input{chapters/chapter01/exercises/exercise01.08}
-\input{chapters/chapter01/exercises/exercise01.09}
-\input{chapters/chapter01/exercises/exercise01.10}
-\input{chapters/chapter01/exercises/exercise01.11}
-\input{chapters/chapter01/exercises/exercise01.12}
-\input{chapters/chapter01/exercises/exercise01.13}
-\input{chapters/chapter01/exercises/exercise01.14}
-\input{chapters/chapter01/exercises/exercise01.15}
-\input{chapters/chapter01/exercises/exercise01.16}
-\input{chapters/chapter01/exercises/exercise01.17}
-\input{chapters/chapter01/exercises/exercise01.18}
-\input{chapters/chapter01/exercises/exercise01.19}
-\input{chapters/chapter01/exercises/exercise01.20}
-\input{chapters/chapter01/exercises/exercise01.21}
-\input{chapters/chapter01/exercises/exercise01.22}
+\paragraph{Exercise 1.1} We flip a fair coin ten times.
+\begin{enumerate}
+  \item[(a)] Our sample space $\Omega$ is the set of all possible outcomes of ten
+    fair coin flips. All simple events have equal probability. The sample space has
+    $2^{10}$ simple events, so each of them has probability $2^{-10}$. We are
+    interested in the probability of the event $E_a$ that the number of heads and
+    the number of tails are equal; that is, in the event that there are 5 heads.
+    There are $\binom{10}{5}$ simple events that fulfil this condition. Consequently,
+    \[
+      \pr(E_a) = \binom{10}{5} \cdot 2^{-10} = 252 \cdot 2^{-10} = \frac{63}{256}.
+    \]
+
+  \item[(b)] We are interested in the probability of the event $E_b$ that there are
+    more heads than tails. Let $E_i$ be the event that the number of heads equals
+    $i \in [0, 10]$. Then $E = \bigcup_{i = 6}^{10} E_i$. Since $E_1, E_2,..., E_{10}$
+    are mutually disjoint,
+    \begin{align*}
+      \pr\left(E_b\right)
+        &= \pr\left(\bigcup_{i = 6}^{10} E_i \right)      = \sum_{i=6}^{10} \pr\left(E_i\right) = 2^{-10} \sum_{i=6}^{10} \binom{10}{i} \\
+        &= 2^{-10} \left( 210 + 120 + 45 + 10 + 1\right)  = \frac{193}{512}.
+    \end{align*}
+
+  \item[(c)] We are interested in the probability of the event $E_c$ that the $i$th
+    flip and the $(11 - i)$th flip are the same for $i \in [1,5]$. Let
+    $X_i \in$ \{H, T\} be the outcome of the $i$th flip. Since we are tossing a
+    fair coin, $\pr\left(X_i = \text{H} \right) = \pr\left(X_i = \text{T} \right) = \frac{1}{2}$.
+    For $X_{11-i}$ holds, $\pr\left(X_{11-i} = X_i \right) = \pr\left(X_{11-i}
+    \not= X_i \right) = \frac{1}{2}$. Since the outcome of each toss is independet
+    of the outcome of the other nine tosses,
+    \[
+      \pr\left(E_c\right)
+        = \pr\left(\bigcap_{i=1}^5 X_i = X_{11-i}\right)
+        = 2^{-5}.
+    \]
+
+  \item[(d)] We are interested in the probablity of the event $E_d$ that we flip
+    at least four consecutive heads. Let $i \in [1,10]$ and let $E_i$ be the event
+    that we flip $i$ consecutive heads. Then,
+    \[ \pr\left(E_d\right) = \pr\left(\bigcup_{i=4}^{10} E_i\right).\]
+    We have to consider, that the events $E_1,..., E_{10}$ are not mutually disjoint.
+    For instance, the sequence (H,H,H,H,T,H,H,H,H,H) is element both of the event
+    $E_4$ and $E_5$. Let's have a look at the individual events $E_4,..., E_{10}$
+    there $x \in$ \{H,T\}:
+    \begin{align*}
+      \begin{tabular}{lll}
+        $E_4$ &=  &\{(H,H,H,H,T,x,x,x,x,x), (T,H,H,H,H,T,x,x,x,x), (x,T,H,H,H,H,T,x,x,x), \\
+              &   &\ \,(x,x,T,H,H,H,H,T,x,x), (x,x,x,T,H,H,H,H,T,x), (x,x,x,x,T,H,H,H,H,T), \\
+              &   &\ \,(x,x,x,x,x,T,H,H,H,H)\} \\
+        $E_5$ &= &\{(H,H,H,H,H,T,x,x,x,x), (T,H,H,H,H,H,T,x,x,x), (x,T,H,H,H,H,H,T,x,x), \\
+              &   &\ \,(x,x,T,H,H,H,H,H,T,x), (x,x,x,T,H,H,H,H,H,T), (x,x,x,x,T,H,H,H,H,H)\} \\
+        $E_6$ &=  &\{(H,H,H,H,H,H,T,x,x,x), (T,H,H,H,H,H,H,T,x,x), (x,T,H,H,H,H,H,H,T,x), \\
+              &   &\ \,(x,x,T,H,H,H,H,H,H,T), (x,x,x,T,H,H,H,H,H,H)\} \\
+        $E_7$ &=  &\{(H,H,H,H,H,H,H,T,x,x), (T,H,H,H,H,H,H,H,T,x), (x,T,H,H,H,H,H,H,H,T), \\
+              &   &\ \,(x,x,T,H,H,H,H,H,H,H)\} \\
+        $E_8$ &=  &\{(H,H,H,H,H,H,H,H,T,x), (T,H,H,H,H,H,H,H,H,T), (x,T,H,H,H,H,H,H,H,H)\} \\
+        $E_9$ &=  &\{(H,H,H,H,H,H,H,H,H,T), (T,H,H,H,H,H,H,H,H,H)\} \\
+        $E_{10}$ &=  &\{(H,H,H,H,H,H,H,H,H,H)\}.
+      \end{tabular}
+    \end{align*}
+    Now we can determine the cardinality of $E_4, ..., E_{10}$:
+    \begin{align*}
+      \begin{tabular}{ll}
+        $|E_4| = 2 \cdot 2^5 + 5 \cdot 2^4 = 144$   &$|E_8| = 2 \cdot 2^1 + 1 \cdot 2^0 = 5$ \\
+        $|E_5| = 2 \cdot 2^4 + 4 \cdot 2^3 = 64$    &$|E_9| = 2 \cdot 2^0 = 2$ \\
+        $|E_6| = 2 \cdot 2^3 + 3 \cdot 2^2 = 28$    &$|E_{10}| = 1.$ \\
+        $|E_7| = 2 \cdot 2^2 + 2 \cdot 2^1 = 12$    & \\
+      \end{tabular}
+    \end{align*}
+    The events $E_4 \cup E_5, E_6, E_7, E_8, E_9, E_{10}$ are mutually disjoint.
+    Therefore,
+    \[ \pr\left(E_d\right) = \pr\left(\bigcup_{i=4}^{10} E_i\right)
+      = \pr\left(E_4 \cup E_5 \right) + \sum_{i=6}^{10} \pr\left(E_i\right).\]
+    It holds that
+    \[
+      \pr\left(E_4 \cup E_5 \right)
+      = \pr\left(E_4\right) + \pr\left(E_5 \right) + \pr\left(E_4 \cap E_5 \right)
+      = 2^{-10} \cdot 144 + 2^{-10} \cdot 64 - 2^{-10} \cdot 2
+      = \frac{103}{512}.
+    \]
+    Now, we can compute the probability for event $E_d$:
+    \[ \pr\left(E_d\right)
+      = \pr\left(E_4 \cup E_5 \right) + \sum_{i=6}^{10} \pr\left(E_i\right) \\
+      = \frac{103}{512} + 2^{-10}(28 + 12 + 5 + 1) \\
+      = \frac{63}{256}.
+    \]
+\end{enumerate}
+
+\paragraph{Exercise 1.2} Let $i \in \{ 1,2 \}$ and $X_i$ be the outcome of roll $i$.
+\begin{enumerate}
+  \item[(a)] We are interested in the probability of the event that $X_1 = X_2$,
+    that is
+    \[
+      \pr(X_1 = X_2) = \sum_{i=1}^6 \pr(X_1 = i \cap X_2 = i).
+    \]
+    Since the outcomes of the rolls are independent,
+    \begin{align*}
+      \pr(X_1 = X_2)  &= \sum_{i=1}^6 \pr(X_1 = i \cap X_2 = i) \\
+                      &= \sum_{i=1}^6 \pr(X_1 = i) \cdot \pr(X_2 = i) \\
+                      &= 6 \cdot \frac{1}{6} \cdot \frac{1}{6} \\
+                      &= \frac{1}{6}.
+    \end{align*}
+
+  \item[(b)] We are interested in the probability of the event that $X_1 > X_2$,
+    that is
+    \begin{align*}
+      \pr(X_1 > X_2)  &= \sum_{i=1}^6 \pr(X_1 = i \cap X_2 < i) \\
+                      &= \sum_{i=1}^6 \pr(X_1 = i) \cdot \pr(X_2 < i) \\
+                      &= \frac{1}{6} \sum_{i=1}^6 \pr(X_2 < i) \\
+                      &= \frac{1}{6} \sum_{i=1}^6 (i-1) \cdot \frac{1}{6} \\
+                      &= \frac{1}{36} \sum_{i=1}^5 i.
+    \end{align*}
+    Now we can apply the Small Gauss sum formula to get
+    \[
+      \pr(X_1 > X_2) = \frac{1}{36} \sum_{i=1}^5 i
+        = \frac{1}{36} \cdot \frac{5 \cdot (5 + 1)}{2}
+        = \frac{5}{12}.
+    \]
+
+  \item[(c)] We are interested in the probability of the event that $X_1 + X_2$
+    is even. The sum of $X_1$ and $X_2$ is even if and only if either both $X_1$
+    and $X_2$ are even or both $X_1$ and $X_2$ are odd,
+    \[
+      \pr(X_1 + X_2 = 0 \text{  mod }2) = \pr\left(X_1 = X_2 \text{  mod }2\right).
+    \]
+    Since the outcomes of the rolls are independent and  the events $X_i = 0 \text{  mod }2$ and $X_i = 1 \text{  mod }2)$ are disjoint, for $i \in \{ 1,2 \}$,
+    \begin{align*}
+      \pr(X_1 + X_2 = 0 \text{  mod }2)
+         &= \pr((X_1 = 0 \text{  mod }2 \cap X_2 = 0 \text{  mod }2)  \quad \cup \quad (X_1 = 1 \text{  mod }2 \cap X_2 = 1 \text{  mod }2)) \\
+         &= \pr(X_1 = 0 \text{  mod }2 \cap X_2 = 0 \text{  mod }2)     \quad  +   \quad \pr(X_1 = 1 \text{  mod }2 \cap X_2 = 1 \text{  mod }2) \\
+         &= \pr(X_1 = 0 \text{  mod }2) \cdot \pr(X_2 = 0 \text{  mod }2)\quad  +  \quad \pr(X_1 = 1 \text{  mod }2) \cdot \pr(X_2 = 1 \text{  mod }2) \\
+         &= \frac{1}{2} \cdot \frac{1}{2} \quad  +   \quad \frac{1}{2} \cdot \frac{1}{2} \\
+         &= \frac{1}{2}.
+  \end{align*}
+
+  \item[(d)] The value of the product of the dice is in the interval [1,36]. The
+    set $S$ of all perfect squares in this interval equals $\{ 1, 4, 9, 16, 25, 36 \}$.
+    So we are interested in the probability that the product of the dice is an
+    element of $S$, $\pr\left(X_1 \cdot X_2 \in S\right)$. Then one has
+    \[
+      \pr\left(X_1 \cdot X_2 \in S\right)
+        = \sum_{s \in S}\pr\left(X_1 \cdot X_2 = s\right)
+        = \frac{1}{36} + \frac{3}{36} +  \frac{1}{36} +  \frac{1}{36} +  \frac{1}{36} +  \frac{1}{36}\\
+        = \frac{2}{9}.
+    \]
+\end{enumerate}
+
+\paragraph{Exercise 1.3} We shuffle a standard deck of cards, obtaining a permutation
+that is uniform over all 52! possible permutations.
+\begin{enumerate}
+  \item[(a)] We are interested in the probability of the event $E_a$ that the
+    first two cards include at least one ace. Therefore we compute the complementary
+    probability of $E_a$, that is the probability $\pr\left(\bar{E_a}\right)$
+    that the first two cards inlude no ace. Since a standard deck of cards
+    includes 4 aces,
+    \[ \pr\left(\bar{E_a}\right) = \frac{48}{52} \cdot \frac{47}{51} = \frac{188}{221}.\]
+    Consequently,
+    \[ \pr\left(E_a\right) = 1 - \pr\left(\bar{E_a}\right) = 1 - \frac{188}{221} = \frac{33}{221}.\]
+
+  \item[(b)] Let $E_b$ be the event that the first five cards include at least one
+    ace. Again we compute the complementary probability of the specified event.
+    \[
+      \pr\left(E_b\right)
+        = 1 - \pr\left(\bar{E_b}\right)
+        = 1 - \frac{48}{52} \cdot \frac{47}{51} \cdot \frac{46}{50} \cdot \frac{45}{49} \cdot \frac{44}{48}
+        = 1 - \frac{205,476,480}{311,875,200}.
+    \]
+    Alternatively, we could argue that the described situation suites the conditions
+    for a hypergeometric situation, so that
+    \[
+      \pr\left(E_b\right)
+        = 1 - \frac{\binom{4}{0} \cdot \binom{48}{5}}{\binom{52}{5}}
+        = 1 - \frac{\binom{48}{5}}{\binom{52}{5}}.
+    \]
+
+  \item[(c)] Let $E_c$ be the event that the first two cards are a pair of the
+    same rank.  $E_c$ occurs if the second card has the same rank as the first
+    card. Therefore, one has
+    \[ \pr\left(E_c\right) = \frac{3}{51} = \frac{1}{17}.\]
+
+  \item[(d)] Let $E_d$ be the event that the first five cards are all diamonds. Then,
+    \[
+      \pr\left(E_d\right)
+        = \frac{\binom{13}{5} \cdot \binom{39}{0}}{\binom{52}{5}}
+        = \frac{\binom{13}{5}}{\binom{52}{5}}
+        = \frac{13 \cdot 12 \cdot 11 \cdot 10 \cdot 9}{52 \cdot 51 \cdot 50 \cdot 49 \cdot 18}
+        = \frac{33}{66,640}.
+    \]
+
+  \item[(e)] Let $E_e$ be the event that the first five cards form a full house
+    (three of one rank and two of another rank). Let us think of event $E_e$ as
+    drawing 5 cards from a deck. Two of them have to be from different rank, so
+    there are $\binom{13}{2}$ possibilities two choose two different ranks.
+    Altogether we have to draw three from one of the picked rank and two of the
+    other. Since it doesn't matter which rank appears three and which two times,
+    one has
+    \[
+      \pr\left(E_e\right)
+        = \frac{\binom{13}{2} \cdot \binom{4}{3} \cdot \binom{4}{2} \cdot 2}{\binom{52}{5}}
+        = \frac{78 \cdot 4 \cdot 6 \cdot 2}{2,598,960}
+        = \frac{6}{4,165}.
+    \]
+\end{enumerate}
+
+\paragraph{Exercise 1.4} Let us play a tournament in which we stop as soon as one
+of us wins n games. We are evenly matched, so each of us wins any game with
+probability $\frac{1}{2}$, independently of other games. What is the probability
+that the loser has won $k$ games when the match is over? \\[0.2cm]
+Let $X$ be the number of games the loser has won. We are interested in the
+probability that $X = k$, that is the probability that the tournament ends after
+$n + k$ games. Therefore, the winner has to win $n-1$ games among the first
+$n + k - 1$ games and additionally has to win the $(n+k)$-th game. Every tournament
+that fulfills this condition has probability $\frac{1}{2}^n \cdot \frac{1}{2}^{k}$.
+Since there are $\binom{n+k-1}{n-1}$ possibilities to choose $n-1$ games the winner
+wins among $n+k-1$ games,
+\[
+  \pr\left(X = k\right)
+    = \binom{n+k-1}{n-1} \cdot \left(\frac{1}{2}\right)^n \cdot \left(\frac{1}{2}\right)^{k}
+    = \binom{n+k-1}{n-1} \cdot \frac{1}{2^{n+k}}.
+\]
+To verify this result, we show that the following equation holds.
+\[
+  \sum_{k=0}^{n-1}\pr\left(X=k\right) = 1.
+\]
+Because of the symmetry of the binomial coefficient, that is $\binom{b}{a} = \binom{b}{b - a}$,
+\begin{align*}
+  \sum_{k=0}^{n-1}\pr\left(X=k\right)
+    &= \sum_{k=0}^{n-1} \binom{n+k-1}{n-1} \cdot \frac{1}{2^n} \cdot \frac{1}{2^k} \\
+    &= \sum_{k=0}^{n-1} \binom{n+k-1}{k} \cdot \frac{1}{2^n} \cdot \frac{1}{2^k} \\
+    &= \frac{1}{2^n} \cdot \sum_{k=0}^{n-1} \binom{n+k-1}{k} \cdot \frac{1}{2^k}.
+\end{align*}
+Since $\binom{b}{a} = (-1)^a \binom{a - b - 1}{a}$,
+\begin{align*}
+  \sum_{k=0}^{n-1}\pr\left(X=k\right)
+    &= \frac{1}{2^n} \cdot \sum_{k=0}^{n-1} \binom{n+k-1}{k} \cdot \frac{1}{2^k} \\
+    &= \frac{1}{2^n} \cdot \sum_{k=0}^{n-1} \binom{k+n-1}{k} \cdot (-1)^k \left(- \frac{1}{2}\right)^{k} \\
+    &= \frac{1}{2^n} \cdot \sum_{k=0}^{n-1} \binom{-n}{k} \cdot \left(- \frac{1}{2}\right)^{k}.
+\end{align*}
+Under consideration of the binomial series $(1 + x)^b = \sum_{a=0}^{\infty}
+\binom{b}{a}x^a, \quad |x| < 1, b \in \mathbb{R}$, we finally get
+\begin{align*}
+  \sum_{k=0}^{n-1}\pr\left(X=k\right)
+    &= \frac{1}{2^n} \cdot \sum_{k=0}^{n-1} \binom{-n}{k} \cdot \left(- \frac{1}{2}\right)^{k} \\
+    &= \frac{1}{2^n} \cdot \left(1 - \frac{1}{2}\right)^{-n} \\
+    &= \frac{1}{2^n} \cdot 2^n \\
+    &= 1.
+\end{align*}
+
+\paragraph{Exercise 1.5}
+\begin{enumerate}
+  \item[(a)] Assume that Bob chooses die A and Alice chooses die B. In the
+    following we list all of the possible events and their probabilities.
+    \begin{align*}
+    \begin{tabular}{c|c|c|c}
+        die A   &die B  &Probability    &Winner \\
+        \hline
+            1       &2      &1/3 $\cdot$ 1/3 = 1/9 &Alice\\
+            1       &4      &1/9        &Alice\\
+            1       &9      &1/9        &Alice\\
+            6       &2      &1/9        &Bob\\
+            6       &4      &1/9        &Bob\\
+            6       &9      &1/9        &Alice\\
+            8       &2      &1/9        &Bob\\
+            8       &4      &1/9        &Bob\\
+            8       &9      &1/9        &Alice\\
+    \end{tabular}
+  \end{align*}
+    Therefore the probability that Alice wins is $5 \cdot \frac{1}{9} =
+    \frac{5}{9} > \frac{1}{2}$.
+
+  \item[(b)] Assume that Bob chooses die B and Alice chooses die C. In the
+    following we list all of the possible events and their probabilities.
+    \begin{align*}
+    \begin{tabular}{c|c|c|c}
+        die B   &die C  &Probability  &Winner \\
+        \hline
+            2       &3      &1/9      &Alice\\
+            2       &5      &1/9      &Alice\\
+            2       &7      &1/9      &Alice\\
+            4       &3      &1/9      &Bob\\
+            4       &5      &1/9      &Alice\\
+            4       &7      &1/9      &Alice\\
+            9       &3      &1/9      &Bob\\
+            9       &5      &1/9      &Bob\\
+            9       &7      &1/9      &Bob\\
+    \end{tabular}
+  \end{align*}
+    Again, the probability that Alice wins is $5 \cdot \frac{1}{9} =
+    \frac{5}{9} > \frac{1}{2}$.
+
+  \item[(c)] Assume that Bob chooses die C and Alice chooses die A. In the
+    following we list all of the possible events and their probabilities.
+    \begin{align*}
+    \begin{tabular}{c|c|c|c}
+        die C   &die A  &Probability  &Winner \\
+        \hline
+            3       &1      &1/9      &Bob\\
+            3       &6      &1/9      &Alice\\
+            3       &8      &1/9      &Alice\\
+            5       &1      &1/9      &Bob\\
+            5       &6      &1/9      &Alice\\
+            5       &8      &1/9      &Alice\\
+            7       &1      &1/9      &Bob\\
+            7       &6      &1/9      &Bob\\
+            7       &8      &1/9      &Alice\\
+    \end{tabular}
+  \end{align*}
+    And still, the probability that Alice wins is $5 \cdot \frac{1}{9} =
+    \frac{5}{9} > \frac{1}{2}$.
+
+\end{enumerate}
+
+\paragraph{Exercise 1.6} Balls-and-bin game: We start with one black ball and one
+white ball in a bin. We repeatedly choose one ball from the bin uniformly at
+random, and then put the ball back in the bin with another ball of the same color.
+We repeat until there are $n$ balls in the bin. \\[0,2cm]
+Let $X$ be the number of white balls and $k \in \mathbb{N}$, so that $0 \leq k
+\leq n-2$. We want to show that,
+\[ \pr(X=k+1) = \frac{1}{n-1}. \]
+To model this $(n-2)$-stage balls-and-bin game, we describe the drawing of a white
+ball as the event 1 and and a black ball as the event 0 respectively. Then our
+sample space $\Omega$ can be defined as $\Omega := \Omega_1 \times ... \times
+\Omega_{n-2}$, where $\Omega_j = \{ 0, 1\}$ and $j = 1,...,n-2$. Now one concrete
+balls-and-bin game can be described as an elementary event $\omega =
+(a_1,...,a_{n-2}) \in \Omega$, where $a_j \in \Omega_j$ specifies the $j$-th ball
+that we draw. Then
+\begin{align*}
+  \pr(\omega)
+    &= \pr(a_{n-2}| a_1,...,a_{n-3}) \cdot \pr(a_1,...,a_{n-3}) \\
+    &= \pr(a_1) \cdot \pr(a_2| a_1) \cdot \pr(a_3| a_1,a_2) \cdot ... \cdot \pr(a_{n-2}| a_1,...,a_{n-3}).
+\end{align*}
+Let $p_j(1)$ be the probability that the $j$-th ball that we draw is
+a white ball and $p_j(0)$ the probability that the $j$-th ball is a black one. \\
+Initially there is one white and one black ball in the bin. Therefore,
+\[ p_1(1) = \frac{1}{2} = p_1(0). \]
+Suppose we have drawn $j-1$ balls and there has been $w$ white and $j-1-w$ black
+ones among them. Consequently there are $1 + w$ white balls and $1 + j - 1 - w$
+black balls in the bin before the draw the $j$-th ball. Let
+$\left(a_1,...,a_{j-1}\right)$ be a tuple with $w$ 1's and $(j-1-w)$ 0's, that is
+$\sum_{i=1}^{j-1}a_i = w$. Then
+\begin{align*}
+    p_j(1|a_1,...,a_{j-1}) = \frac{1 + w}{1 + 1 + (j-1)}, \\
+    p_j(0|a_1,...,a_{j-1}) = \frac{1+j-1-w}{1 + 1 + (j-1)}.
+\end{align*}
+Let $\omega = (a_1, ..., a_{n-2}) \in \Omega$, so that $\sum_{j=1}^{n-2}a_j = k$
+and $0 \leq k \leq n-2$. Then
+\[
+  \pr(\omega) = \frac {\prod_{j=0}^{k-1}(1 + j) \prod_{j=0}^{(n-2)-k-1}(1 + j)}
+                      {\prod_{j=0}^{n-3}(1+1+j)}.
+\]
+Since the event $X=k+1$ consists of all tuples $(a_1,...,a_{n-2})$ with
+$\sum_{j=1}^{n-2}a_j = k$ and since each of these tuples has the above probability,
+\begin{align*}
+  \pr(X=k+1)
+    &= \binom{n-2}{k} \cdot \frac {\prod_{j=0}^{k-1}(1 + j) \prod_{j=0}^{(n-2)-k-1}(1 + j)}{\prod_{j=0}^{n-3}(1+1+j)} \\
+    &= \frac{(n-2)!}{k! (n-2-k)!} \cdot \frac{k! \cdot (n-2-k)!}{(n-1)!} \\
+    &= \frac{1}{n-1}.
+\end{align*}
+Hence the number of white balls is equally likely to be any number between 1 and
+$n-1$.
+
+\paragraph{Exercise 1.7}
+\begin{enumerate}
+  \item[(a)] \textbf{Lemma 1.3} (\textcolor{WildStrawberry}{Inclusion-exclusion
+    principle}): Let $E_1,...,E_n$ be any $n$ events. Then
+    \[
+      \pr\left(\bigcup_{i=1}^n E_i\right)
+      = \sum_{i=1}^n \pr(E_i) - \sum_{i<j}\pr(E_i \cap E_j) + \sum_{i<j<k}\pr(E_i \cap E_j \cap E_k) - ... + (-1)^{l+1} \sum_{i_1<i_2< ... <i_l} \pr\left(\bigcap_{r=1}^lE_{i_r}\right)+ ... .
+    \]
+    \textit{Proof}. We want to show the Inclusion-exclusion principle by induction
+    over $n \in \mathbb{N}$, where $n \geq 2$. \\
+    For the base case (IB) assume that $n = 2$. According to Lemma 1.1, one has
+    \begin{align*}
+      \pr\left(E_1 \cup E_2 \right)
+        &= \pr(E_1) + \pr(E_2) - \pr\left(E_1 \cap E_2 \right) \\
+        &= \sum_{i=1}^2 \pr(E_i) - \sum_{i<j}\pr\left(E_1 \cap E_2 \right).
+    \end{align*}
+    Let $n \geq 2$, so that the Inclusion-exclusion principle holds for $n$
+    (induction hypothesis, IH). We have to show, that the Inclusion-exclusion
+    principle then also hold for $n+1$.
+    \begin{align*}
+      \pr\left(\bigcup_{i=1}^{n+1} E_i\right)
+        &= \pr\left(\left(\bigcup_{i=1}^{n} E_i\right) \cup E_{n+1}\right) \\
+        &=_{\text{Lemma 1.1}} \pr\left(\bigcup_{i=1}^{n} E_i\right) + \pr(E_{n+1}) -
+            \pr\left(\left(\bigcup_{i=1}^{n} E_i\right) \cap E_{n+1}\right) \\
+        &= \pr\left(\bigcup_{i=1}^{n} E_i\right) + \pr(E_{n+1}) -
+            \pr\left(\bigcup_{i=1}^{n} \left(E_i \cap E_{n+1}\right)\right) \\
+        &=_{IH} \pr(E_{n+1}) +
+          \left(
+            \sum_{i=1}^n \pr(E_i) - \sum_{i<j}\pr(E_i \cap E_j) + ... + (-1)^{n+1}
+            \sum_{i_1<i_2< ... <i_n} \pr\left(\bigcap_{r=1}^n E_{i_r}\right)
+          \right) \\
+        &\ \ - \Bigg(
+            \sum_{i=1}^n \pr\left(E_i \cap E_{n+1}\right) -
+            \sum_{i<j} \pr\left((E_i \cap E_{n+1}) \cap (E_j \cap E_{n+1})\right)
+            + ... \\
+        &\quad \quad \quad+ (-1)^{n+1} \sum_{i_1<i_2< ... <i_n} \pr\left(\bigcap_{r=1}^n
+            \left(E_{i_r} \cap E_{n+1}\right)\right)
+          \Bigg) \\
+        &= \sum_{i=1}^{n+1} \pr(E_i) - \sum_{i<j}\pr(E_i \cap E_j) + ... +
+          (-1)^{n+1} \sum_{i_1<i_2< ... <i_n} \pr\left(\bigcap_{r=1}^n E_{i_r}\right) \\
+        &\ \ - \Bigg(
+            \sum_{i=1}^n \pr\left(E_i \cap E_{n+1}\right) - \sum_{i<j}\pr\left(E_i
+            \cap E_j \cap E_{n+1}\right) + ...
+         + (-1)^{n+1} \sum_{i_1<i_2< ... <i_n} \pr\left(\bigcap_{r=1}^n
+          \left(E_{i_r} \cap E_{n+1}\right)\right)
+          \Bigg) \\
+        &= \sum_{i=1}^{n+1} \pr(E_i) - \sum_{i<j}\pr(E_i \cap E_j) +  ... + (-1)^{n+2}
+          \sum_{i_1<i_2< ... <i_{n+1}} \pr\left(\bigcap_{r=1}^{n+1}E_{i_r}\right).
+    \end{align*}
+    Hence, the Inclusion-exclusion principle applies.
+
+  \item[(b)] \textbf{Lemma 1.8}: Let $E_1,...,E_n$ be any $n$ events and $l \in
+  \mathbb{N}$, so that $l$ is odd. Then
+  \[
+    \pr\left(\bigcup_{i=1}^n E_i\right)
+    \leq \sum_{i=1}^n \pr(E_i) - \sum_{i<j}\pr(E_i \cap E_j) + \sum_{i<j<k}\pr(E_i \cap E_j \cap E_k) - ... + (-1)^{l+1} \sum_{i_1<i_2< ... <i_l} \pr\left(\bigcap_{r=1}^lE_{i_r}\right).
+  \]
+  \textit{Proof}. Let $l \in \mathbb{N}$, so that $3 \leq l \leq n$ and $l$ is odd. According to Lemma 1.3 one has,
+  \begin{align*}
+  \begin{tabular}{l}
+    $\pr\left(\bigcup_{i=1}^n E_i\right) -
+    \left(
+      (-1)^{l+2} \sum_{i_1<i_2< ... <i_{l+1}} \pr\left(\bigcap_{r=1}^{l+1} E_{i_r}\right) + ... +
+      (-1)^{n+1} \pr\left(\bigcap_{i=1}^n E_{i}\right)
+    \right)$ \\
+    $\ \ = \sum_{i=1}^n \pr(E_i) + ... + (-1)^{l+1} \sum_{i_1<i_2< ... <i_l}
+      \pr\left(\bigcap_{r=1}^lE_{i_r}\right).$
+  \end{tabular}
+  \end{align*}
+  Therefore, we have to show that
+  \[
+    (-1)^{l+2} \sum_{i_1<i_2< ... <i_{l+1}} \pr\left(\bigcap_{r=1}^{l+1} E_{i_r}\right)
+    + ... + (-1)^{n+1} \pr\left(\bigcap_{i=1}^n E_{i}\right) \leq 0.
+  \]
+  Since $l$ is odd,
+  \begin{align*}
+      &(-1)^{l+2} \sum_{i_1<i_2< ... <i_{l+1}} \pr\left(\bigcap_{r=1}^{l+1} E_{i_r}\right) + ... + (-1)^{n+1} \pr\left(\bigcap_{i=1}^n E_{i}\right) \\
+    = &-\sum_{i_1<i_2< ... <i_{l+1}} \pr\left(\bigcap_{r=1}^{l+1} E_{i_r}\right)
+      + ... + (-1)^{n+1} \pr\left(\bigcap_{i=1}^n E_{i}\right).
+  \end{align*}
+  Furthermore, for any $1 \leq k < n$ holds,
+  \[
+    \sum_{i_1<i_2< ... <i_k} \pr\left(\bigcap_{r=1}^k E_{i_r}\right)
+    \geq \sum_{i_1<i_2< ... <i_{k+1}} \pr\left(\bigcap_{r=1}^{k+1} E_{i_r}\right).
+  \]
+  Hence, for any pair $(k,k+1)$, there $l+1 \leq k < n$ and $k$ is even, holds
+  \begin{align*}
+    \   &(-1)^{k+1} \sum_{i_1<i_2< ... <i_{k}} \pr\left(\bigcap_{r=1}^{l+1} E_{i_r}\right) + (-1)^{k+2} \pr\left( \bigcap_{r=1}^{k+1} E_{i} \right) \\
+    =   &-\sum_{i_1<i_2< ... <i_k} \pr\left( \bigcap_{r=1}^{l+1} E_{i_r} \right) + \pr\left(\bigcap_{r=1}^{k+1} E_{i}\right) \\
+    \leq &\ 0.
+  \end{align*}
+  Therefore,
+  \[
+    (-1)^{l+2} \sum_{i_1<i_2< ... <i_{l+1}} \pr\left(\bigcap_{r=1}^{l+1} E_{i_r}\right)
+    + ... + (-1)^{n+1} \pr\left(\bigcap_{i=1}^n E_{i}\right) \leq 0,
+  \]
+  and
+  \[
+    \pr\left(\bigcup_{i=1}^n E_i\right)
+    \leq \sum_{i=1}^n \pr(E_i) - \sum_{i<j}\pr(E_i \cap E_j) + \sum_{i<j<k}\pr(E_i \cap E_j \cap E_k) - ... + (-1)^{l+1} \sum_{i_1<i_2< ... <i_l} \pr\left(\bigcap_{r=1}^lE_{i_r}\right).
+  \]
+
+  \item[(c)] \textbf{Lemma 1.9}: Let $E_1,...,E_n$ be any $n$ events and $l \in
+  \mathbb{N}$, so that $l$ is even. Then
+  \[
+    \pr\left(\bigcup_{i=1}^n E_i\right)
+    \geq \sum_{i=1}^n \pr(E_i) - \sum_{i<j}\pr(E_i \cap E_j) + \sum_{i<j<k}\pr(E_i \cap E_j \cap E_k) - ... + (-1)^{l+1} \sum_{i_1<i_2< ... <i_l} \pr\left(\bigcap_{r=1}^lE_{i_r}\right).
+  \]
+  \textit{Proof}. Let $l \in \mathbb{N}$, so that $2 \leq l \leq n$ and $l$ is even. Similarly to exercise 1.7b) we want now to show that
+  \[
+    (-1)^{l+2} \sum_{i_1<i_2< ... <i_{l+1}} \pr\left(\bigcap_{r=1}^{l+1} E_{i_r}\right)
+    + ... + (-1)^{n+1} \pr\left(\bigcap_{i=1}^n E_{i}\right) \geq 0.
+  \]
+  Since $l$ is even,
+  \begin{align*}
+      &(-1)^{l+2} \sum_{i_1<i_2< ... <i_{l+1}} \pr\left(\bigcap_{r=1}^{l+1} E_{i_r}\right) + ... + (-1)^{n+1} \pr\left(\bigcap_{i=1}^n E_{i}\right) \\
+    = &\sum_{i_1<i_2< ... <i_{l+1}} \pr\left(\bigcap_{r=1}^{l+1} E_{i_r}\right)
+      - ... + (-1)^{n+1} \pr\left(\bigcap_{i=1}^n E_{i}\right).
+  \end{align*}
+  For any pair $(k,k+1)$, there $l+1 \leq k < n$ and $k$ is odd, holds
+  \begin{align*}
+    \   &(-1)^{k+1} \sum_{i_1<i_2< ... <i_{k}} \pr\left(\bigcap_{r=1}^{l+1} E_{i_r}\right) + (-1)^{k+2} \pr\left( \bigcap_{r=1}^{k+1} E_{i} \right) \\
+    =   &\sum_{i_1<i_2< ... <i_k} \pr\left( \bigcap_{r=1}^{l+1} E_{i_r} \right) - \pr\left(\bigcap_{r=1}^{k+1} E_{i}\right) \\
+    \geq &\ 0.
+  \end{align*}
+  Therefore,
+  \[
+    (-1)^{l+2} \sum_{i_1<i_2< ... <i_{l+1}} \pr\left(\bigcap_{r=1}^{l+1} E_{i_r}\right)
+    + ... + (-1)^{n+1} \pr\left(\bigcap_{i=1}^n E_{i}\right) \geq 0,
+  \]
+  and
+  \[
+    \pr\left(\bigcup_{i=1}^n E_i\right)
+    \geq \sum_{i=1}^n \pr(E_i) - \sum_{i<j}\pr(E_i \cap E_j) + \sum_{i<j<k}\pr(E_i \cap E_j \cap E_k) - ... + (-1)^{l+1} \sum_{i_1<i_2< ... <i_l} \pr\left(\bigcap_{r=1}^lE_{i_r}\right).
+  \]
+
+\end{enumerate}
+
+\paragraph{Exercise 1.8} Let us choose a number uniformly at random from the range
+$[1, 1,000,000]$. Using the inclusion–exclusion principle, we want to determine
+the probability that the number chosen is divisible by one or more of 4, 6, and 9. \\
+Let $E_i$ be the event that the choosen number is divisible by $i\in \mathbb{N}^+$.
+Starting from 1, every $i$-th natural number is divisible by $i$. Therefore
+\begin{align*}
+  \pr\left(E_4\right) &= \frac{\left\lfloor \frac{1,000,001}{4} \right\rfloor}{1,000,001} = \frac{250,000}{1,000,001} \\
+  \pr\left(E_6\right) &= \frac{\left\lfloor \frac{1,000,001}{6} \right\rfloor}{1,000,001} = \frac{166,666}{1,000,001} \\
+  \pr\left(E_9\right) &= \frac{\left\lfloor \frac{1,000,001}{9} \right\rfloor}{1,000,001} = \frac{111,111}{1,000,001}.
+\end{align*}
+A number $n \in \mathbb{N}$ is divisible by two numbers $i,j \in \mathbb{N}^+$
+if ans only if $n$ is divisible by the least common multiple. The least
+common multiple of 4 and 6 is 12, of 4 and 9 is 36, of 6 and 9 is 18 and of 4, 6
+and 9 is 36. Consequently
+\begin{align*}
+  \pr\left(E_4 \cap E_6\right) &= \frac{\left\lfloor \frac{1,000,001}{12} \right\rfloor}{1,000,001} = \frac{83,333}{1,000,001} \\
+  \pr\left(E_4 \cap E_9\right) &= \frac{\left\lfloor \frac{1,000,001}{36} \right\rfloor}{1,000,001} = \frac{27,777}{1,000,001} \\
+  \pr\left(E_6 \cap E_9\right) &= \frac{\left\lfloor \frac{1,000,001}{18} \right\rfloor}{1,000,001} = \frac{55,555}{1,000,001} \\
+  \pr\left(E_4 \cap E_6 \cap E_9\right) &= \frac{\left\lfloor \frac{1,000,001}{36} \right\rfloor}{1,000,001} = \frac{27,777}{1,000,001}.
+\end{align*}
+Applying the inclusion-exclusion principle, we are now able to determine the
+probability that the chosen number is divisible by one or more of 4, 6, and 9.
+\begin{align*}
+  \pr\left(\bigcup_{i\in \{4,6,9\}}E_i\right)
+    &= \sum_{i\in \{4,6,9\}} \pr\left(E_i\right) -
+       \left(\pr\left(E_4 \cap E_6\right) + \pr\left(E_4 \cap E_9\right) + \pr\left(E_6 \cap E_9\right)\right) + \pr\left(E_4 \cap E_6 \cap E_9 \right) \\
+    &= \frac{527,777}{1,000,001} - \frac{166,665}{1,000,001} + \frac{27,777}{1,000,001} \\
+    &= \frac{388,889}{1,000,001}.
+\end{align*}
+
+\paragraph{Exercise 1.9} Suppose that a fair coin is flipped $n$ times. Let $i, k \in
+\mathbb{N}^+, 1 \leq i \leq n - \left(\log_2(n) + k \right) + 1$ and let $E_i$ be the
+event that there is a sequence of $\log_2(n) + k$ consecutive heads, starting with
+the $i$th flip. \\
+We are interested in an upper bound on $\pr\left(\bigcup_i E_i\right)$. Let's first
+determine the probability $\pr(E_i)$ that a coin comes up heads $\log_2(n) + k$
+times in succession. Since the coin is fair, one has
+\[ \pr(E_i)
+  = \left(\frac{1}{2}\right)^{\log_2(n) + k}
+  = \frac{1}{2^{\log_2(n)}} \cdot \frac{1}{2^k}
+  = \frac{1}{n} \cdot \frac{1}{2^k}
+  = \frac{1}{2^k n}.
+\]
+Note that the events $E_1,...,E_{n - \left(\log_2(n) + k \right) + 1}$ are not
+mutually disjoint. Therefore $\pr\left(\bigcup_i E_i\right) = \sum_i \pr(E_i)$
+doesn't apply. However, since we are only interested in an upper bound on
+$\pr\left(\bigcup_i E_i\right)$ we can apply the union bound (Lemma 1.2),
+\[ \pr\left(\bigcup_i E_i\right) \leq \sum_i \pr(E_i). \]
+Therefore
+\[ \pr\left(\bigcup_i E_i\right)
+  \leq \left(n - \left(\log_2(n) + k \right) + 1\right) \cdot \frac{1}{2^k n}
+  = \frac{1}{2^k} - \frac{\log_2(n) + k - 1}{2^k n}
+  \leq \frac{1}{2^k}.
+\]
+Hence $\frac{1}{2^k}$ is an upper bound on the probability that there is a
+sequence of $\log_2(n) + k$ consecutive heads, with $k \in \mathbb{N}^+$.
+
+\paragraph{Exercise 1.10} Assume that we have a fair coin and a two-headed coin.
+We choose one of the two coins randomly with equal probability and flip it. Given
+that the flip was heads, what is the probability that we flipped the two-headed coin? \\
+Let $F$ be the event that we choose the fair coin and $U$ the event that we choose
+the two-headed coin. Let $H$ be the event that the choosen coin comes up heads
+and $T$ the event that it comes up tails. \\
+We are interested in the conditional probability $\pr(U|H)$. Applying Bayes' Law
+one has
+\[ \pr(U|H)
+    = \frac{\pr(U \cap H)}{\pr(H)}
+    =\frac{\pr(H|U) \cdot \pr(U)}{\pr(H|U) \cdot \pr(U) + \pr(H|F) \cdot \pr(F)}
+    =\frac{1 \cdot \frac{1}{2}}{1 \cdot \frac{1}{2} + \frac{1}{2} \cdot \frac{1}{2}}
+    = \frac{2}{3}.
+\]
+
+\paragraph{Exercise 1.11} Assume we are trying to send a single bit, either a 0
+ or a 1. When we transmit the bit, it goes through a series of $n$ relays
+ before it arrives. Each relay flips the bit independently with probability $p$.
+ \begin{enumerate}
+   \item[(a)] We are interested in the probabilty to receive the correct bit.
+    If an odd number of relays flips the bit an incorrect bit arrives and if
+    an even number of relays flips the bit the correct bit arrives. Let $k \in
+    \mathbb{N}$ and let $E_k$ be the event that exactly $2 \cdot k$ relays flip
+    the bit. Then
+    \[ \pr\left(\cup_{k=0}^{\left\lfloor n/2 \right\rfloor} E_k \right) \]
+    is the probability to receive the correct bit.
+    Since $E_0,...,E_{\left\lfloor n/2 \right\rfloor}$ are mutually
+    disjoint events,
+    \[
+      \pr\left(\cup_{k=0}^{\left\lfloor n/2 \right\rfloor} E_k \right)
+      = \sum_{k=0}^{\left\lfloor n/2 \right\rfloor} \pr\left( E_k \right).
+    \]
+    Let $k \in \mathbb{N}$. There are $\binom{n}{2k}$ possibilities to choose $2k$
+    relays among the $n$ relays that flip the bit. The probability that $2k$
+    specified relays flip the bit, is $p^{2k}(1-p)^{n-2k}$. Therefore
+    \[ \pr\left(E_k\right) = \binom{n}{2k} p^{2k}(1-p)^{n-2k}, \]
+    and
+    \[
+      \pr\left(\cup_{k=0}^{\left\lfloor n/2 \right\rfloor} E_k \right)
+      = \sum_{k=0}^{\left\lfloor n/2 \right\rfloor} \pr\left( E_k \right)
+      = \sum_{k=0}^{\left\lfloor n/2 \right\rfloor} \binom{n}{2k} p^{2k}(1-p)^{n-2k}.
+    \]
+
+   \item[(b)] Let us say the relay has bias $q$, there $q \in \mathbb{R}$,
+   $q \in [-1, 1]$ if the probability it flips the bit is $(1 - q)/2$. We want
+   to show that sending a bit through two relays with bias $q_1$ and $q_2$ is
+   equivalent to sending a bit through a single relay with bias $q_1q_2$. \\
+   Let $X \in $ \{correct, incorrect\} indicate whether we receive the correct bit
+   after sending it through two relays with bias $q_1$ and $q_2$. Similarly, let
+   $Y \in $ \{correct, incorrect\} indicate whether we receive the correct bit
+   after sending it through one relays with bias $q_1q_2$. According to the
+   definition of the bias of a relay, one has
+   \[ \pr(Y = \text{incorrect}) = \frac{1 - q_1q_2}{2}. \]
+   Let's consider the event $\{ X = \text{incorrect} \}$. This event occurs if and
+   only if exactly one of the two relays flips the bit. Therefore
+   \begin{align*}
+     \pr\left( X = \text{incorrect} \right)
+      &= \frac{1-q_1}{2} \cdot \left(1 - \frac{1-q_2}{2}\right) +
+         \frac{1-q_2}{2} \cdot \left(1 - \frac{1-q_1}{2}\right) \\
+      &= \frac{1-q_1}{2} - \frac{(1-q_1)(1-q_2)}{4} +
+         \frac{1-q_2}{2} - \frac{(1-q_2)(1-q_1)}{4} \\
+      &= \frac{1}{4} \left( 2(1-q_1) - (1-q_1)(1-q_2) + 2(1-q_2) - (1-q_2)(1-q_1) \right) \\
+      &= \frac{1}{2} \left((1-q_1) - (1-q_1)(1-q_2) + (1-q_2) \right) \\
+      &= \frac{1}{2} \left(1 - q_1 - (1 - q_2 - q_1 + q_1q_2) + 1 - q_2 \right) \\
+      &= \frac{1}{2} \left(1 - q_1 - 1 + q_2 + q_1 - q_1q_2 + 1 - q_2 \right) \\
+      &= \frac{1}{2} \left(1 - q_1q_2 \right). \\
+   \end{align*}
+   Hence, $\pr\left( X = \text{incorrect} \right) = \pr\left( Y = \text{incorrect}
+   \right)$, and consequently sending a bit through two relays with bias $q_1$ and
+   $q_2$ is equivalent to sending a bit through a single relay with bias $q_1q_2$.
+
+   \item[(c)] Theorem: The probability you receive the correct bit when it passes
+    through $n$ relays is
+    \[ \frac{1 + (1 - 2p)^n}{2}. \]
+    \textit{Proof}. We show the above theorem by induction over $n \in \mathbb{N}^+$.
+    As the base case, assume that $n = 1$. The probability you receive the correct
+    bit equals the probability that the only relay doesn't flip, that is $(1 - p)$.
+    Since
+    \[ \frac{1 + (1 - 2p)^1}{2} = \frac{2 - 2p}{2} = (1 - p), \]
+    the theorem applies for the base case. \\
+    Let $n \in \mathbb{N}^+$, so that the probability you receive the correct bit
+    when it passes through $n$ relays is $\frac{1 + (1 - 2p)^n}{2}$ (induction
+    hypothesis, IH). We have to show that the theorem also applies for $n+1$
+    relays. Let $E_1$ be the event that the bit is correct after it passes through
+    $n$ relays and the $(n+1)$th relay doesn't flip the bit. Let $E_2$ be the
+    event that the bit is incorrect after it passes through $n$ relays and the
+    $(n+1)$th relay flips the bit. Let $E$ be the event that you receive the correct
+    bit when it passes through $n + 1$ relays. Then $E = E_1 \cup E_2$. Since
+    $E_1$ and $E_2$ are mutually disjoint, one has
+    \begin{align*}
+      \pr(E)
+      &= \pr(E_1) + \pr(E_2) \\
+      &=_{\text{IH}}  \left( \frac{1 + (1 - 2p)^n}{2} \cdot (1 - p) \right) +
+        \left( \left( 1 - \frac{1 + (1 - 2p)^n}{2} \right) \cdot p \right) \\
+      &= \frac{1}{2} \left( (1-p) + (1-p)(1 - 2p)^n \right) +
+        \frac{1}{2} \left( 2p - (p + p(1 - 2p)^n \right) \\
+      &= \frac{1}{2} \left( 1 - p + (1-p)(1 - 2p)^n + 2p - p - p(1 - 2p)^n \right) \\
+      &= \frac{1}{2} \left( 1  + (1 - 2p)^n(1 - p - p) \right) \\
+      &= \frac{1  + (1 - 2p)^{n+1}}{2}.
+    \end{align*}
+    Hence, the probability you receive the correct bit when it passes through $n$
+    relays is $\frac{1 + (1 - 2p)^n}{2}$.
+ \end{enumerate}
+
+\paragraph{Exercise 1.12} Monty Hall problem: \\
+Intuitive solution: Assume that the contestant made her first choice. Since the
+contestant had initially no further information , the probability that it is
+behind one of the other curtains is $\frac{2}{3}$. Monty then opens one of the
+other curtains to show a goat. Consequently the probability that the car is behind
+the revealed curtain is 0. Since the probability that the car is behind one
+of the non-chosen curtains is $\frac{2}{3}$, the probability that the car is behind
+the not-chosen and not-revealed curtain is now $\frac{2}{3}$. Therefore, the
+contestant should switch curtains.
+
+Let's analyse the given problem formally. First, we define the sample space $\Omega$.
+Let $i \in \{ 1, 2, 3 \}$ and $C_i$ the event that the car is behind curtain $i$.
+Then $\Omega = \{ C_1, C_2, C_3 \}$. Furthermore, let $O_i$ be the event that Monty
+opens curtain $i$. Without loss of generality assume that the contestant chooses
+curtain 1 and that Monty opens curtain 2. Now we are interested in the probabilities
+$\pr\left(C_1 | O_2\right)$ and $\pr\left(C_2 | O_2\right)$. Since $C_1, C_2$ and
+$C_3$ are mutually disjoint sets such that $\cup_{i=1}^3 C_i = \Omega$, Bayes' Law
+applies and one has
+\[
+  \pr\left(C_1 | O_2\right)
+    = \frac {\pr\left(O_2 | C_1\right) \cdot \pr\left(C_1 \right)} {\sum_{i=1}^3 \pr\left(O_2 | C_i\right) \cdot \pr\left(C_i\right)}
+    = \frac {\frac{1}{2} \cdot \frac{1}{3}}{\frac{1}{2} \cdot \frac{1}{3} + 0 \cdot \frac{1}{3} + 1 \cdot \frac{1}{3}}
+    = \frac{1}{3},
+\]
+and
+\[
+  \pr\left(C_3 | O_2\right)
+    = \frac {\pr\left(O_2 | C_3\right) \cdot \pr\left(C_3 \right)}{\sum_{i=1}^3 \pr\left(O_2 | C_i\right) \cdot \pr\left(C_i\right)}
+    = \frac {1 \cdot \frac{1}{3}}{\frac{1}{2} \cdot \frac{1}{3} + 0 \cdot \frac{1}{3} + 1 \cdot \frac{1}{3}}
+    = \frac{2}{3}.
+\]
+Since $\pr\left(C_3 | O_2\right) > \pr\left(C_1 | O_2\right)$, the contestant
+should switch the curtains.
+
+\paragraph{Exercise 1.13}  Let $D$ be the event that a person has the disorder and
+$\bar{D}$ the event that the person has not the disorder. Our samples space $\Omega$
+comprises the whole population. Obviously $D$ and $\bar{D}$ are mutually disjoint
+sets such that $D \cup \bar{D} = \Omega$. Furthermore, let $P$ be the event that
+a person is tested positive. We can now apply Bayes' Law to compute the probability
+that a person chosen uniformely at random and tested positive has the disorder.
+\[
+  \pr(D|P)
+    = \frac{\pr(P|D) \cdot \pr(D)}{\pr(P|D) \cdot \pr(D) + \pr(P|\bar{D}) \cdot \pr(\bar{D})}
+    = \frac{0.999 \cdot 0.02}{0.999 \cdot 0.02 + 0.005 \cdot 0.98}
+    = \frac{0.01998}{0.02488}
+    = \frac{999}{1244}
+    \approx 0.803.
+\]
+Hence, the probability that a positive tested person has the disorder is
+approximately 0.803.
+
+\paragraph{Exercise 1.14} I am playing in a racquetball tournament, and I am up
+against a player I have watched but never played before. I consider three
+possibilities for my prior model: we are equally talented, and each of us is equally
+likely to win each game; I am slightly better, and therefore I win each game
+independently with probability 0.6; or he is slightly better, and thus he wins
+each game independently with probability 0.6. Before we play, I think that each
+of these three possibilities is equally likely. In our match we play until one
+player wins three games. I win the second game, but he wins the first, third, and
+fourth. After this match, in my posterior model, with what probability should I
+believe that my opponent is slightly better than I am?
+Let $B$ be the event that I am slightly better than my opponent, $E$ the event that
+we are equally talented, and $W$ the event that my opponent is slightly better than
+I am. $B, E$ and $W$ are mutually disjoint events. Let LWLL be the event that I
+win the second game and my opponent wins th first, third and fourth game. \\
+We will apply Bayes' Law to compute the probability that my opponent is slightly
+better than I am under the condition that LWLL occurs.
+\begin{align*}
+  \pr(W|\text{LWLL})
+    &= \frac{\pr(\text{LWLL}|W) \cdot \pr(W)}{\pr(\text{LWLL}|B) \cdot \pr(B) + \pr(\text{LWLL}|E) \cdot \pr(E) + \pr(\text{LWLL}|W) \cdot \pr(W)} \\
+    &= \frac{\left(\frac{3}{5}\right)^3 \cdot \frac{2}{5} \cdot \frac{1}{3}} {\left( \frac{2}{5} \right)^3 \cdot \frac{3}{5} \cdot \frac{1}{3} + \left( \frac{1}{2} \right) ^4 \cdot \frac{1}{3} + \left(\frac{3}{5}\right)^3 \cdot \frac{2}{5} \cdot \frac{1}{3}} \\
+    &= \frac{864}{1873} \\
+    &\approx 0.461.
+\end{align*}
+Hence, in my posterior model, the probability that my opponent is slightly better
+than I am is approximately 0.461.
+
+\paragraph{Exercise 1.15} Suppose that we roll ten standard six-sided dice.
+Let $n \in \mathbb{N}^+$ and let $E_n$ be the event that the sum of $n$ rolled
+standard six-sided dice is divisible by 6. \\
+We claim that $\pr(E_n) = \frac{1}{6}$. We will prove that statement by induction
+on $n \in \mathbb{N}^+$. As the base case assume that $n=1$. There is exactly one
+possible outcome that is divisible by 6 - namely 6. Therefore $\pr(E_1) = \frac{1}{6}$.
+Let $n \in \mathbb{N}^+$, so that $\pr(E_n) = \frac{1}{6}$ (induction hypothesis,
+IH). Let's consider $\pr(E_{n+1})$. $E_{n+1}$ occurs either when $E_{n+1}$ occurs
+and our $(n+1)$th roll shows a 6, or when $E_{n+1}$ doesn't occur but the sum of
+the first $n$ rolled dice is equal to 6 minus the outcome of the $(n+1)$th roll
+modulo 6. Whatever case occurs, there is exactly one possible outcome of the
+$(n+1)$th rolled dice, so that the total sum is divisble by 6. Therefore
+\[
+  \pr(E_{n+1})
+    = \frac{1}{6} \cdot \pr(E_n) + \frac{1}{6} \cdot \pr(\bar{E_n})
+    =_{\text{IH}} \frac{1}{6} \cdot \frac{1}{6} + \frac{1}{6} \cdot \frac{5}{6}
+    = \frac{1}{6}.
+\]
+Hence, $\pr(E_n) = \frac{1}{6}$ for all $n \in \mathbb{N}^+$. Consequently, the
+probability that the sum of 10 rolled standard six-sided dice is divisible by
+6 is $\frac{1}{6}$.
+
+\paragraph{Exercise 1.16} Let's formalize the setting. Our sample space $\Omega$
+consists of all possible sequences of rolls. Furthermore, let $E_1$ be the event
+that all three dice show the same number on the first roll. Let $E_2$ be the event
+that exactly two of the three dice show the same number on the first roll, and let
+$E_3$ be the event that all three dice show different numbers on the first roll.
+Obviously $E_1, E_2$ and $E_3$ are mutually disjoint events such that
+$E_1 \cup E_2 \cup \E_3 = \Omega$. Additionally, let $W$ be the event that the
+player wins the game.
+\begin{enumerate}
+  \item[(a)] The probability that all three dice show a specified number is
+    $\frac{1}{6^3}$. Since there are six different numbers and it does not matter
+    which of them the dice show as long as they all show the same number,
+    \[ \pr(E_1) = 6 \cdot \frac{1}{6^3} = \frac{1}{36}.\]
+
+  \item[(b)] The probability that two dice show a specified number and one die
+    shows any other number is $\frac{1}{6^2} \cdot \frac{5}{6} = \frac{5}{6^3}$.
+    Since there are six different numbers and it does not matter which two of the
+    three dice show the same number,
+    \[ \pr(E_2) = \binom{3}{2} \cdot 6 \cdot \frac{5}{6^3} = \frac{5}{12}.\]
+
+  \item[(c)] Assume that exactly two of the three dice show the same number on
+    the first roll. According to the player's strategy, the player re-rolls the
+    die that does not match. The probability that she wins after the second roll
+    is therefore $\frac{1}{6}$. Assume that she does not win after the second roll.
+    Then again, she re-rolls the die that does not match and the probability that
+    the die shows the requested number is $\frac{1}{6}$. Therefore, for the
+    probability that the player wins, conditioned on exactly two of the three dice
+    showing the same number on the first roll holds
+    \[ \pr(W|E_2) =\frac{1}{6} + \frac{5}{6} \cdot \frac{1}{6} = \frac{11}{36}. \]
+
+  \item[(d)] Let's first determine the probability that all dice show different
+    numbers on the first roll. This happens when the second die shows a different
+    number than the first one, and the third die shows a different number than the
+    first and the sceond die. Therefore $\pr(E_3) = \frac{5}{6} \cdot \frac{4}{6}
+    = \frac{5}{9}$. \\
+    Furthermore, let us consider the probability that the player wins, conditioned
+    on all three dice showing different numbers on the first roll. According to the
+    player's strategy, the player re-rolls all dice. Since the rolls are independent,
+    the probability that she wins after the second roll is $\frac{1}{36}$. The
+    probability that all dice are different and she wins after the third roll is
+    $\frac{5}{9} \cdot \frac{1}{36}$. The probability that exactly two dice show the
+    same number and she wins after the third roll is $\frac{5}{12} \cdot \frac{1}{6}$.  Altogether, one has
+    \[ \pr(W|E_3)
+        = \frac{1}{36} + \frac{5}{9} \cdot \frac{1}{36} +
+          \frac{5}{12} \cdot \frac{1}{6}
+        = \frac{73}{648}.
+    \]
+    We can now apply the Law of total probability to compute the probability that
+    the player wins the game.
+    \[
+      \pr(W)
+        = \sum_{i=1}^3 \pr(W|E_i) \cdot \pr(E_i)
+        = 1 \cdot \frac{1}{36} + \frac{11}{36} \cdot \frac{5}{12} + \frac{73}{648} \cdot \frac{5}{9}
+        = \frac{2,539}{11,664}
+        \approx 0.218.
+    \]
+\end{enumerate}
+
+\paragraph{Exercise 1.17} Let's analyse the matrix multiplication algorithm of
+section 1.3 under the assumption that we are working over the integers modulo $k$
+for $k > 2$. \\
+Our modified algorithm chooses a random vector $\bar{r} = (r_1, r_2, ..., r_n)
+\in \{ 0, 1, ..., k-1 \} ^n$. It then computes $\textbf{AB}\bar{r}$ by first
+computing $\textbf{B}\bar{r}$ and then $\textbf{A}(\textbf{B} \bar{r})$, and it
+also computes $\textbf{C} \bar{r}$. If $\textbf{A}(\textbf{B}\bar{r}) \not=
+\textbf{C}\bar{r}$, then $\textbf{AB} \not= \textbf{C}$. Otherwise, it returns
+that $\textbf{AB} = \textbf{C}$. \\
+The probability that the algorithm returns that $\textbf{AB} = \textbf{C}$ when
+they are actually not equal is bounded by the following theorem. \\
+\textbf{Theorem}: If $\textbf{AB} \not= \textbf{C}$ and if $\bar{r}$ is chosen
+uniformly at random from $\{ 0, 1, ..., k-1 \} ^n$, then
+\[ \pr(\textbf{AB}\bar{r}) = \textbf{C}\bar{r}) \leq \frac{1}{k}. \]
+\textit{Proof}. Let $\textbf{D} = \textbf{AB} - \textbf{C} \not= 0$. Then
+$\textbf{AB}\bar{r} = \textbf{C}\bar{r}$ implies that $\textbf{D}\bar{r} = 0$.
+Since $\textbf{D} \not= 0$ it must have some nonzero entry; without loss of
+generality, let that entry be $d_{11}$. \\
+For $\textbf{D}\bar{r} = 0$, it must be the case that
+\[ \sum_{j=1}^n d_{1j}r_j = 0 \]
+or, equivalently,
+\begin{align} r_1 = \frac{\sum_{j=2}^n d_{1j}r_j}{d_{11}}. \end{align}
+Suppose that we choose the $r_j$ independently and uniformly at random from
+$\{ 0, 1, ..., k-1 \}$ in order, from $r_n$ down to $r_1$. Choosing the $r_j$ in
+this way is equivalent to choosing a vector $\bar{r}$ uniformly at random. Now
+consider the situation just before $r_1$ is chosen. At this point, the right-hand
+side of Eqn. (1.1) is determined, and there is at most one choice for $r_1$ that
+will make the equality hold. Since there are $k$ choices for $r_1$, the equality
+holds with probability at most $\frac{1}{k}$, and hence the probability that
+$\textbf{AB}\bar{r} = \textbf{C}\bar{r}$ is at most $\frac{1}{k}$.
+
+\paragraph{Exercise 1.18} Suppose we are given an integer $z \in \{ 0, ..., n-1 \}$
+and want to output a value that equals $F(z)$ with probability at least
+$\frac{1}{2}$. \\
+We use a randomized algorithm that chooses a random number $x \in \{ 0, ..., n-1 \}$.
+It then computes $y = (z - x) \text{ mod }n$ and afterwards uses the lookup table
+to output the value $(F(x) + F(y)) \text{ mod }m$. \\
+If the adversary has not changed the values of $x$ and $y$ we can be sure that
+our algorithm outputs the correct value. The probability that the adversary has
+changed neither $x$ nor $y$ is $\frac{4}{5} \cdot \frac{4}{5} = \frac{16}{25}$.
+Since $\frac{16}{25} \geq \frac{1}{2}$, our algorithm outputs a value that equals
+F(z) with probability at least $\frac{1}{2}$.
+
+Suppose that we are allowed to repeat our initial algorithm three times. Let $i
+\in \{ 1, 2, 3 \}$ and let $a_i$ be the output of the $i$th application of the
+algorithm. We use the following strategy: If at least two outcomes match, we output
+the corresponding value. Otherwise the output $a_1$.  \\
+ Let $C$ be the event that we output the correct answer. To assess $\pr(C)$, we
+consider the probability of the complementary event. The probability that we
+output the wrong value is greater than zero if and only if there are at least
+two wrong outputs among the three applications of our algorithm. The probability
+that there are at least two wrong outputs is $\left(\frac{9}{25}\right)^2$.
+Therefore
+\[ \pr(C) = 1 - \pr(\bar{C})\geq 1 - \left(\frac{9}{25}\right)^2 = \frac{544}{625}.\]
+Hence,the probability $\pr(C)$ that our enhanced algorithm returns the correct
+answer is at least $0.8704$.
+
+\paragraph{Exercise 1.19} We roll two standard six-sided dice. Let $i \in \{ 1, 2 \}$
+and let $X_i \in \{ 1, 2, 3, 4, 5, 6 \}$ be the outcome of the $i$-th die. Let
+$X = X_1 + X_2$. Then
+\begin{align*}
+  \pr(X = 2 | X_1 = 6) = 0 < \frac{1}{36} = \pr(X = 2); \\
+  \pr(X_1 = 2 | X_2 = 2) = \frac{1}{6} = \pr(X_1 = 2); \\
+  \pr(X_1 = 1 | X = 2) = 1 > \frac{1}{6} = \pr(X_1 = 1).
+\end{align*}
+
+\paragraph{Exercise 1.20} $~$ \\[0.2cm]
+\textbf{Theorem 1.10}: If $E_1, E_2, ..., E_n$ are mutually independent, then so
+are $\bar{E_1}, \bar{E_2}, ..., \bar{E_n}$. \\[0.2cm]
+\textit{Proof}. Let $E_1, E_2, ..., E_n$ be mutually independent. Then, for any
+subset $I \subseteq [1, n]$,
+\begin{align*}
+  \pr\left(\bigcap_{i \in I} \bar{E_i}\right)
+    &= \pr\left(\bar{\bigcup_{i \in I} E_i}\right) \\
+    &= 1 - \pr\left(\bigcup_{i \in I} E_i\right) \\
+    &= 1 - \left( \sum_{i \in I}\pr(E_i) - \sum_{i,j \in I, i < j} \pr(E_i \cap E_j) + ... + (-1)^{|I| + 1}\pr\left(\bigcap_{i\in I}E_i\right) \right) \\
+    &= 1 - \left( \sum_{i \in I} \pr(E_i) - \sum_{i,j \in I, i < j} \pr(E_i) \cdot \pr(E_j) + ... + (-1)^{|I| + 1}\prod_{i\in I} \pr(E_i) \right) \\
+    &= 1 - \sum_{i \in I}\pr(E_i) + \sum_{i,j \in I, i < j} \pr(E_i) \cdot \pr(E_j) + ... + (-1)^{|I|}\prod_{i\in I} \pr(E_i) \\
+    &= \prod_{i \in I}\left(1 - \pr(E_i)\right) \\
+    &= \prod_{i \in I}\pr(\bar{E_i}).
+\end{align*}
+We have used De Morgan's law in the first line, the inclusion-exclusion principle
+in the third line and the assumption that $E_1, E_2, ..., E_n$ are mutually
+independent combined with definition 1.3 in the fourth line.
+
+\paragraph{Exercise 1.21} We choose a number uniformly at random from the set
+$\{ 1, 2, 3, 4 \}$. Then $\Omega = \{ 1, 2, 3, 4 \}$. Let $X, Y, Z$ be three events,
+such that $X = \{ 1, 2 \}, Y = \{ 2, 3 \}$ and $Z = \{ 1, 3 \}$. Since
+\begin{align*}
+  \pr(X \cap Y) = \pr\left(\{ 2 \}\right) = \frac{1}{4}
+    = \frac{1}{2} \cdot \frac{1}{2} = \pr(X) \cdot \pr(Y), \\
+  \pr(X \cap Z) = \pr\left(\{ 1 \}\right) = \frac{1}{4}
+    = \frac{1}{2} \cdot \frac{1}{2} = \pr(X) \cdot \pr(Z), \\
+  \pr(Y \cap Z) = \pr\left(\{ 3 \}\right) = \frac{1}{4}
+    = \frac{1}{2} \cdot \frac{1}{2} = \pr(Y) \cdot \pr(Z),
+\end{align*}
+$X, Y, Z$ are three random events such that any pair of them is independent.
+However, since
+\[
+  \pr(X \cap Y \cap Z) = \pr(\emptyset) = 0
+    < \left(\frac{1}{2}\right)^3 = \pr(X) \cdot \pr(Y) \cdot \pr(Z)
+\]
+$X, Y$ and $Z$ are not mutually independent.
+
+\paragraph{Exercise 1.22}
+\begin{enumerate}
+  \item[(a)] If each $1 \leq i \leq n$ is chosen independently and uniformly at
+  random with probability $1/2$, then each of the $2^n$ possible subsets of
+  $\{ 1, ..., n \}$ is chosen with probability $2^{-n}$, giving the statement.
+
+  \item[(b)] Let us consider $\pr\left( X \subseteq Y \right)$. $Y$ is a superset
+  of $X$ if and only if all elements of $X$ are also elements of $Y$. Let $X$ be
+  a particular subset of $\{ 1, ..., n \}$. In order to generate a superset of $X$
+  our coin has to land heads for all elements added to $X$. Therefore the probability
+  that $Y$ is a superset of the particular set $X$ is $2^{-|X|}$, and
+  \[ \pr\left( X \subseteq Y \right) = \sum_{X \in \mathcal{P}\left(\{1, ..., n\}\right)} 2^{-|X|}.\]
+  Since there are $\binom{n}{i}$ subsets of $\{ 1, ..., n \}$ with exactly $i$
+  elements,
+  \[ \pr\left( X \subseteq Y \right)
+  = \sum_{X \in \mathcal{P}\left(\{1, ..., n\}\right)} 2^{-|X|}
+  = \sum_{i=0}^n \binom{n}{i} \cdot \left(\frac{1}{2}\right)^{i}
+  = \left( \frac{1}{2} + 1 \right)^n
+  = \left( \frac{3}{2} \right)^n,\]
+  where we used the binomial formula to achieve the third equation.
+  Furthermore, we want to determine $\pr\left( X \cup Y = \{ 1, ..., n \}\right)$.
+  Again, consider the situation there $X$ is a particular subset of $\{ 1, ..., n \}$.
+  $X \cup Y = \{ 1, ..., n \}$ if and only if $Y$ is a superset of $\bar{X}$.
+  The probability that $Y$ is a superset of our particular set $X$ is $2^{n-|X|}$.
+  Consequently one has,
+  \[ \pr\left( X \cup Y = \{ 1, ..., n \}\right)
+  = \sum_{X \in \mathcal{P}\left(\{1, ..., n\}\right)} 2^{n-|X|}
+  = \sum_{i=0}^n \binom{n}{i} \cdot \left(\frac{1}{2}\right)^{n-i}
+  = \left( 1 + \frac{1}{2} \right)^n
+  = \left( \frac{3}{2} \right)^n.\]
+\end{enumerate}

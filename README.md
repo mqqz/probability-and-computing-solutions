@@ -10,17 +10,13 @@ solutions.tex                 # Main document and chapter order
 preamble.tex                  # Shared packages and formatting
 chapters/
   chapter01/
-    chapter01.tex             # Chapter title and exercise inputs
-    exercises/
-      exercise01.01.tex       # Individual exercise solution
-      ...
+    chapter01.tex             # Chapter title and exercise solutions
   ...
   chapter08/
 ```
 
-Each chapter has its own directory. Exercise solutions belong in that chapter's
-`exercises/` subdirectory and are included in numerical order by its chapter file.
-Chapters without solutions currently contain only their chapter file.
+Each chapter has its own directory. Exercise solutions are written directly in
+its chapter file, in numerical order.
 
 All LaTeX input paths are relative to the repository root. Build from that directory:
 
@@ -28,7 +24,6 @@ All LaTeX input paths are relative to the repository root. Build from that direc
 latexmk -pdf solutions.tex
 ```
 
-To add a solution, create `chapters/chapterNN/exercises/exerciseNN.MM.tex` and add
-`\input{chapters/chapterNN/exercises/exerciseNN.MM}` to
+To add a solution, append a `\paragraph{Exercise N.M}` and its solution to
 `chapters/chapterNN/chapterNN.tex` in numerical order. New chapters must also be
 included in `solutions.tex`.
